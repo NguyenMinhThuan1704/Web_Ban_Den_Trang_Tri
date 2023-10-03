@@ -332,6 +332,11 @@
         max-width: 20%;
     }
 
+    .l-2-8 {
+        flex: 0 0 80%;
+        max-width: 80%;
+    }
+
     .l-3 {
         flex: 0 0 25%;
         max-width: 25%;
