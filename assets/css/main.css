@@ -8,9 +8,10 @@
     /* background-color: transparent; */
 }
 
-/* *::-webkit-scrollbar{
+.new__product-item-wrapper::-webkit-scrollbar{
     display: none;
-} */
+}
+
 
 .banner {
     max-width: 100%;
