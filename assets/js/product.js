@@ -42,11 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     // Gọi hàm typePlaceholder để bắt đầu hiển thị placeholder đầu tiên
     typePlaceholder();
-  });
-  
 
-// Sử dụng sự kiện DOMContentLoaded để đảm bảo mã chạy sau khi trang tải hoàn toàn
-document.addEventListener("DOMContentLoaded", function () {
     // Lấy số lượng ban đầu từ trường nhập liệu
     var quantity = parseInt(document.querySelector(".product-quantity input.qty").value);
     var selectProduct = document.querySelector(".product-quantity input.qty");
@@ -72,4 +68,41 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       selectProduct.value = quantity;
     });
+
+//-------------------GIỎ HÀNG--------------------
+
+// tăng số lượng sản phẩm
+
+  const quantityInput = document.getElementById("quantity");
+  const incrementButton = document.getElementById("increment");
+  const decrementButton = document.getElementById("decrement");
+
+  incrementButton.addEventListener("click", function () {
+    const currentValue = parseInt(quantityInput.value);
+    if (currentValue >= 0) {
+      quantityInput.value = currentValue + 1;
+    }
   });
+
+  decrementButton.addEventListener("click", function () {
+    const currentValue = parseInt(quantityInput.value);
+    if (currentValue > 0) {
+      quantityInput.value = currentValue - 1;
+    }
+  });
+
+// chọn 1 trong 2 input
+  const cashPayment = document.getElementById("cashPayment");
+  const onlinePayment = document.getElementById("onlinePayment");
+
+  cashPayment.addEventListener("change", function () {
+    onlinePayment.checked = !cashPayment.checked;
+  });
+
+  onlinePayment.addEventListener("change", function () {
+    cashPayment.checked = !onlinePayment.checked;
+  });
+});
+
+
+
