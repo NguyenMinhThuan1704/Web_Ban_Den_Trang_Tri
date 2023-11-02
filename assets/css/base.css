@@ -24,6 +24,10 @@ html {
     font-family: 'Roboto', sans-serif;
 }
 
+input::placeholder {
+    color: #949494;
+}
+
 @keyframes subnavGrowth {
     from {
         opacity: 0;
