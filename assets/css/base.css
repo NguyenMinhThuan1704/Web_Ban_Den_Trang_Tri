@@ -28,6 +28,10 @@ input::placeholder {
     color: #949494;
 }
 
+.pass::placeholder {
+    color: white;
+}
+
 @keyframes subnavGrowth {
     from {
         opacity: 0;
