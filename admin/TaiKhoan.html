@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,49 +29,67 @@
         <div class="row">
             <div class="col-1 col-s-12 category">
                 <button onclick="TongQuan()"><i class="fas fa-tachometer-alt"></i> Tổng quan</button>
-                <button class="active" onclick="LoaiSanPham()"><i class="fas fa-boxes"></i> Loại sản phẩm</button>
+                <button onclick="LoaiSanPham()"><i class="fas fa-boxes"></i> Loại sản phẩm</button>
                 <button onclick="SanPham()"><i class="fas fa-barcode"></i> Sản phẩm</button>
                 <button onclick="NhaCungCap()"><i class="fas fa-truck"></i> Nhà cung cấp</button>
                 <button onclick="KhachHang()"><i class="fas fa-users"></i> Khách hàng</button>
                 <button onclick="HoaDonNhap()"><i class="fas fa-file-import"></i> Hóa đơn nhập</button>
                 <button onclick="HoaDonBan()"><i class="fas fa-shopping-cart"></i> Hóa đơn bán</button>
                 <button onclick="TinTuc()"><i class="fas fa-newspaper"></i> Tin tức</button>
-                <button onclick="TaiKhoan()"><i class="fas fa-user"></i> Tài khoản</button>
+                <button class="active" onclick="TaiKhoan()"><i class="fas fa-user"></i> Tài khoản</button>
                 <button onclick="ThongKe()"><i class="fa-solid fa-chart-column"></i> Thống kê</button>
             </div>
+            
             <div class="col-11 col-s-12 content">
                 <div class="col-4 col-s-12 content">
                     <div class="tabcontent">
                         <div class="title">
-                            <i class="fas fas fa-boxes"></i> Nhập thông tin loại sản phẩm
+                            <i class="fas fa-barcode"></i> Nhập thông tin tài khoản
                             <hr>
                         </div>
                         <div class="row">
                             <form>
                                 <div class="col-12 col-s-12 padding-box">
-                                    <label for="txtright">Mã loại sản phầm:</label>
+                                    <label for="txtright">Mã tài khoản:</label>
                                 </div>
                                 <div class="col-12 col-s-12 padding-box">
-                                    <input type="text" id="MaLoaiSanPham"
-                                    disabled value="Mã loại sản phầm tự động sinh!" style="background-color: #cecaca;">
+                                    <input type="text" id="MaTK"
+                                        disabled value="Mã tài khoản tự động sinh!" style="background-color: #cecaca;">
                                 </div>
                                 <div class="col-12 col-s-12 padding-box">
-                                    <label for="txtright">Tên loại sản phẩm:</label>
+                                    <label for="txtright">Loại tài khoản:</label>
                                 </div>
                                 <div class="col-12 col-s-12 padding-box">
-                                    <input type="text" id="TenLoaiSanPham" placeholder="Nhập tên loại sản phẩm...">
+                                    <select name="loaisp" id="TenLoaiTaiKhoan" ng-model="selectedTK">
+                                        <option value="">--Chọn loại tài khoản--</option>
+                                        <option value="">Admin</option>
+                                        <option value="">Nhân viên</option>
+                                        <option value="">Khách hàng</option>
+                                    </select>
                                 </div>
                                 <div class="col-12 col-s-12 padding-box">
-                                    <label for="txtright">Nội dung:</label>
+                                    <label for="txtright">Tên tài khoản:</label>
                                 </div>
                                 <div class="col-12 col-s-12 padding-box">
-                                    <input type="text" id="NoiDung" placeholder="Nhập nội dung loại sản phẩm...">
+                                    <input type="text" id="TenTaiKhoan" placeholder="Nhập tên tài khoản...">
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Mật khẩu:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input type="text" id="MatKhau" placeholder="Nhập giá của tài khoản...">
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Email:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input type="text" id="Email" placeholder="Nhập giá sau khi giảm của tài khoản...">
                                 </div>
                             </form>
                         </div>
                         <hr>
-                        <button class="btn-form" style="background-color: rgba(44, 140, 15, 0.8);"
-                            onclick="ThemLoaiSanPham()">Thêm loại sản phẩm</button>
+                        <button id="themSanPhamButton" class="btn-form" style="background-color: rgba(44, 140, 15, 0.8);"
+                            onclick="ThemTaiKhoan()">Thêm tài khoản</button>
                         <button class="btn-form" style="background-color: rgba(227, 32, 21, 0.8);"
                             onclick="NhapMoi()">Nhập mới</button>
                         <button class="btn-form" style="background-color: rgba(14, 87, 224, 0.8);" id="btnUpdate"
@@ -80,21 +99,26 @@
                 <div class="col-8 col-s-12 content">
                     <div class="tabcontent">
                         <div class="title">
-                            <i class="fas fas fa-boxes"></i> Danh sách loại sản phẩm
+                            <i class="fas fa-barcode"></i> Danh sách tài khoản
                             <button ng-click="XoaChon()" style="margin-right: 3px;"><i class="far fa-trash-alt"></i> Xóa
                                 chọn</button>
                             <hr>
                         </div>
                         <div class="row">
-                            <div class="col-5 col-s-12 padding-box">
-                                <input type="text" id="search-product-type" ng-model="tenlsp" placeholder="Nhập tên loại sản phẩm...">
+                            <div class="col-4 col-s-12 padding-box">
+                                <input type="text" id="search-taikhoan" ng-model="tentk" placeholder="Nhập tên tài khoản...">
                             </div>
-                            <div class="col-5 col-s-12 padding-box">
-                                <input type="text" id="search-noidung" ng-model="noidunglsp" placeholder="Nhập nội dung loại sản phẩm...">
+                            <div class="col-6 col-s-12 padding-box">
+                                <select name="loaitk" id="TenLoaiTaiKhoan1" ng-model="selectedTK1">
+                                    <option value="">--Chọn loại tài khoản--</option>
+                                    <option value="">Admin</option>
+                                    <option value="">Nhân viên</option>
+                                    <option value="">Khách hàng</option>
+                                </select>
                             </div>
                             <div class="col-2 col-s-12 padding-box">
                                 <button id="btnSearch"><i class="fas fas fa-search"></i> Tìm kiếm</button>
-                            </div>
+                            </div>                            
                         </div>
                         <div class="row">
                             <div class="col-12 col-s-12 padding-box">
@@ -102,9 +126,11 @@
                                     <thead>
                                         <tr>
                                             <th style="padding-top: 10px;"><input type="checkbox"></th>
-                                            <th>Mã loại sản phẩm</th>
-                                            <th>Tên loại sản phẩm</th>
-                                            <th>Nội dung</th>
+                                            <th>Mã tài khoản</th>
+                                            <th>Tên loại tài khoản</th>
+                                            <th>Tên tài khoản</th>
+                                            <th>Mật khẩu</th>
+                                            <th>Email</th>
                                             <th>Thao tác</th>
                                         </tr>
                                     </thead>
@@ -112,8 +138,10 @@
                                         <tr>
                                             <td><input type="checkbox"></td>
                                             <td>1</td>
-                                            <td>Đèn chùm</td>
-                                            <td></td>
+                                            <td>Admin</td>
+                                            <td>thuan</td>
+                                            <td>123</td>
+                                            <td>thuan@gmail.com</td>
                                             <td style="text-align: center;">
                                                 <i class="fas fa-edit" title="Sửa"></i>
                                                 <i class="fas fa-trash-alt" title="Xóa"></i>
@@ -124,8 +152,10 @@
                                         <tr>
                                             <td><input type="checkbox"></td>
                                             <td>2</td>
-                                            <td>Đèn tường</td>
-                                            <td></td>
+                                            <td>Nhân viên</td>
+                                            <td>thuan1</td>
+                                            <td>123</td>
+                                            <td>thuan1@gmail.com</td>
                                             <td style="text-align: center;">
                                                 <i class="fas fa-edit" title="Sửa"></i>
                                                 <i class="fas fa-trash-alt" title="Xóa"></i>
@@ -136,8 +166,10 @@
                                         <tr>
                                             <td><input type="checkbox"></td>
                                             <td>3</td>
-                                            <td>Đèn thả</td>
-                                            <td></td>
+                                            <td>Khách hàng</td>
+                                            <td>thuan2</td>
+                                            <td>123</td>
+                                            <td>thuan2@gmail.com</td>
                                             <td style="text-align: center;">
                                                 <i class="fas fa-edit" title="Sửa"></i>
                                                 <i class="fas fa-trash-alt" title="Xóa"></i>
@@ -154,6 +186,7 @@
                                         <button ng-click="changePage(2)">2</button>
                                         <button ng-click="changePage(3)">3</button>
                                         <button ng-click="changePage(4)">4</button>
+                                        <button ng-click="changePage(5)">5</button>
                                         <button><i class="fas fa-angle-right"></i></button>
                                     </div>
                                 </div>
@@ -165,5 +198,4 @@
         </div>
     </section>
 </body>
-
 </html>
