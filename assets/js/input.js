@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
           clearInterval(animationTimeout);
           setTimeout(deletePlaceholder, 1000); // Sau khi hiển thị, đợi 1 giây trước khi xóa
         }
-      }, 30); // Tốc độ viết
+      }, 30);
       currentIndex = (currentIndex + 1) % placeholders.length; // Đặt lại currentIndex khi nó đạt cuối mảng
     }
   
