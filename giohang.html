@@ -446,28 +446,28 @@
                         <div class="c-12 thongtin_title">
                             <p>Họ và tên (*):</p>
                             <div class="form-group" id="input-name">
-                                <input type="text" class="form-control name" placeholder="Họ và tên (*)" >
+                                <input type="text" class="form-control" id="name" placeholder="Họ và tên (*)" >
                             </div>
                         </div>
 
                         <div class="c-12 thongtin_title">
                             <p>Số điện thoại (*):</p>
                             <div class="form-group" id="input-phone">
-                                <input class="form-control phone" type="text" placeholder="Số điện thoại (*)">
+                                <input class="form-control phone" id="phone" type="text" placeholder="Số điện thoại (*)">
                             </div>
                         </div>
 
                         <div class="c-12 thongtin_title">
                             <p>Địa chỉ (*):</p>
                             <div class="form-group" id="input-address">
-                                <input class="form-control address" type="text" placeholder="Địa chỉ">
+                                <input class="form-control address" id="address" type="text" placeholder="Địa chỉ">
                             </div>
                         </div>
 
                         <div class="c-12 thongtin_title">
                             <p>Email:</p>
                             <div class="form-group" id="input-email">
-                                <input class="form-control email" type="text" placeholder="Email">
+                                <input class="form-control email" id="email" type="text" placeholder="Email">
                             </div>
                         </div>
                     </div>
@@ -478,7 +478,7 @@
                         <span>Giỏ Hàng Của Bạn</span>
                     </div>
 
-                    <div class="product__wrapper">
+                    <div class="product__wrapper gio_hang">
                         <div class="row grid wide" style="margin-top: 10px;">
                             <div class="col c-12" style="padding: 0; display: flex;">
                                 <div class="col c-2 product__img">
@@ -526,6 +526,8 @@
                         </div>
                     </div>
 
+                    <button class="deleteProductAll" onclick="confirmDelete()">Xóa hết giỏ hàng</button>
+
                     <div class="tongtien">
                       <div class="tongtien__left">Tổng thanh toán:</div>
                       <div class="tongtien__right">
@@ -545,9 +547,9 @@
                           <label for="onlinePayment">Thanh toán online bằng thẻ visa, master, ATM</label>
                         </li>
                       </ul>
-                      <button class="btn__shopping--cart">
+                      <button class="btn__shopping--cart" id="buyNowBtn" onclick="DatHang()">
                         <i class="fa-solid fa-arrow-right"></i>
-                        Mua Ngay
+                        Đặt hàng
                       </button>
                       <a href="index_main.html" class="muasanphamkhac">
                         Mua thêm sản phẩm khác

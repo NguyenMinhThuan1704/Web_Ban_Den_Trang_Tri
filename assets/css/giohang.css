@@ -557,6 +557,24 @@ textarea.form-control {
     border-left: 0;
 }
 
+.deleteProductAll {
+    background-color: #ff2d37;
+    color: #fff;
+    padding: 7px 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    float: right;
+    margin-top: 12px;
+}
+
+.deleteProductAll:hover {
+    color: #fff;
+    box-shadow: 0 4px 14px 0 rgba(110,125,131,.62);
+}
+
 .price {
     width: 100%;
 }
@@ -575,7 +593,7 @@ textarea.form-control {
     align-items: center;
     justify-content: space-between;
     border-top: dashed 1px rgba(0,0,0,.19);
-    margin-top: 8px;
+    margin-top: 60px;
 }
 
 .tongtien__left {

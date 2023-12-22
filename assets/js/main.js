@@ -139,57 +139,65 @@ const denchums = [
       img: './assets/img/Product/Đèn chùm/1.jpg',
       sale: '30%',
       title: 'Đèn chùm hiện đại trang trí phòng khách cao cấp D900mm DR-NC5613/8+4',
-      gia: '12,580,000đ',
-      giagiam: '8,177,000đ'
+      quantity: 1,
+      gia: '12580000',
+      giagiam: '8177000'
     },
     {
         img: './assets/img/Product/Đèn chùm/2.jpg',
         sale: '30%',
         title: 'Đèn chùm sát trần thân sơn đen có 3 chế độ ánh sáng D950mm DR-NC02/10',
-        gia: '5,960,000đ',
-        giagiam: '3,874,000đ'
+        quantity: 1,
+        gia: '5960000',
+        giagiam: '3874000'
     },
     {
         img: './assets/img/Product/Đèn chùm/3.jpg',
         sale: '30%',
         title: 'Đèn chùm thả trần phòng khách có hiệu ứng ánh sáng D1300mm DR-NC692',
-        gia: '9,280,000đ',
-        giagiam: '6,032,000đ'
+        quantity: 1,
+        gia: '9280000',
+        giagiam: '6032000'
     },
     {
       img: './assets/img/Product/Đèn chùm/4.jpg',
       sale: '30%',
       title: 'Quạt trần đèn chùm phòng khách tân cổ điển, 5 cánh bằng gỗ DR-Q2490',
-      gia: '5,850,000đ',
-      giagiam: '3,803,000đ'
+      quantity: 1,
+      gia: '5850000',
+      giagiam: '3803000'
     },
     {
         img: './assets/img/Product/Đèn chùm/5.jpg',
         sale: '30%',
         title: 'Đèn chùm pha lê thả trần phòng khách 12 tay nến D1200mm HP-CFL3524',
-        gia: '46,600,000đ',
-        giagiam: '32,620,000đ'
+        quantity: 1,
+        gia: '46600000',
+        giagiam: '32620000'
     },
     {
         img: './assets/img/Product/Đèn chùm/6.jpg',
         sale: '30%',
         title: 'Đèn chùm phòng khách sát trần hiệu ứng ánh sáng D1100mm PH-TH8239',
-        gia: '4,540,000đ',
-        giagiam: '3,178,000đ'
+        quantity: 1,
+        gia: '4540000',
+        giagiam: '3178000'
     },
     {
         img: './assets/img/Product/Đèn chùm/7.jpg',
         sale: '30%',
         title: 'Quạt trần có đèn led 6 cánh nhựa ABS giả vân gỗ cao cấp PH-QVifa64',
-        gia: '6,990,000đ',
-        giagiam: '4,893,000đ'
+        quantity: 1,
+        gia: '6990000',
+        giagiam: '4893000'
     },
     {
         img: './assets/img/Product/Đèn chùm/8.jpg',
         sale: '30%',
         title: 'Đèn chùm cổ điển phong cách Châu Âu 15 tay chao vải D1040mm DC-9088T15',
-        gia: '12,500,000đ',
-        giagiam: '8,750,000đ'
+        quantity: 1,
+        gia: '12500000',
+        giagiam: '8750000'
     },
   ]
   const list_denchum = document.querySelector('.den_chum')
@@ -212,19 +220,53 @@ const denchums = [
                 </div>
                 <div class="product__title-price">
                     <ul class="price-list">
-                        <li class="price-item">${denchum.giagiam}</li>
-                        <li class="price-item">${denchum.gia}</li>
+                        <li class="price-item">${denchum.giagiam}đ</li>
+                        <li class="price-item">${denchum.gia}đ</li>
                     </ul>
                 </div>
             </div>
 
             <div class="item-title-add">
-                <a href="./giohang.html" class="item-title-link">Mua ngay</a>
+                <a class="item-title-link">Mua ngay</a>
             </div>
         </div>
     `
   })
   list_denchum.innerHTML = html_denchum.join(" ")
+
+let carts = [];
+
+// Lấy dữ liệu từ local storage (nếu có)
+const storedProducts = localStorage.getItem('carts');
+if (storedProducts) {
+    // Chuyển đổi chuỗi JSON thành mảng
+    carts = JSON.parse(storedProducts);
+}
+
+list_denchum.addEventListener('click', (event) => {
+    if (event.target.classList.contains('item-title-link')) {
+        const selectedProductIndex = Array.from(list_denchum.children).indexOf(event.target.closest('.item-product-wrap'));
+        const cart = denchums[selectedProductIndex];
+
+        // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng hay chưa
+        const isProductExist = carts.some(product => product.title === cart.title);
+
+        if (isProductExist) {
+            alert('Sản phẩm đã có trong giỏ hàng.');
+        } else {
+            carts.push(cart);
+
+            localStorage.setItem('carts', JSON.stringify(carts));
+
+            const isConfirmed = window.confirm('Sản phẩm đã được thêm vào giỏ hàng. Bạn có muốn chuyển đến trang giỏ hàng không?');
+
+            if (isConfirmed) {
+                window.location.href = './giohang.html';
+            }
+        }
+    }
+});
+
 
 // ------------- Đèn mâm ốp trần ------------------
 const denmamoptrans = [
