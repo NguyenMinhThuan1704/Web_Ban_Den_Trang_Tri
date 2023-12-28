@@ -1,3 +1,19 @@
+//-------------- slide----------------------
+var bannerWrapper = document.querySelector('.banner-top');
+var bannerItems = document.querySelectorAll('.banner-item');
+var numberOfItems = bannerItems.length;
+// Index của slide đang hiển thị
+var currentIndex = 0;
+
+setInterval(function () {
+    // Tăng index lên 1
+    currentIndex = (currentIndex + 1) % numberOfItems;
+    
+    // Tính giá trị transform để lướt sang slide tiếp theo
+    var transformValue = -currentIndex * 100 + '%';
+    bannerWrapper.style.transform = 'translateX(' + transformValue + ')';
+}, 5000);
+
 //-------------------slider-new-product----------------
 const rightbtn = document.querySelector('.btn-right')
 const leftbtn = document.querySelector('.fa-angle-left')
@@ -11,6 +27,29 @@ rightbtn.addEventListener("click", function(){
 leftbtn.addEventListener("click", function(){
     sildeWrapper.scrollLeft -= newproductlength
 })
+
+// ------------- Tìm kiếm -----------------
+const searchInput = document.querySelector('.pass');
+  const searchIcon = document.querySelector('.search-icon');
+
+  searchIcon.addEventListener('click', () => {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+
+    // Lọc danh sách sản phẩm từ các mảng khác nhau
+    const searchResults = filterProductsByTerm(searchTerm, denchums, denmamoptrans, denthas, dentuongs, denchuyendungs, densois, denleds, denngoaithats, dennangluongs, denphukiens, dentrungbays);
+
+    // Lưu kết quả tìm kiếm vào local storage để sử dụng ở trang search
+    localStorage.setItem('searchResults', JSON.stringify(searchResults));
+
+    window.location.href = './search.html';
+  });
+
+  // Hàm lọc sản phẩm theo từ khóa tìm kiếm trong các danh sách
+  function filterProductsByTerm(searchTerm, ...productLists) {
+    return productLists.flatMap(productList => {
+      return productList.filter(product => product.title.toLowerCase().includes(searchTerm));
+    });
+  }
 
 //-------------- Sản phẩm mới--------------
 const denmois = [
@@ -201,11 +240,11 @@ const denchums = [
     },
   ]
   const list_denchum = document.querySelector('.den_chum')
-  const html_denchum = denchums.map((denchum)=> {
+  const html_denchum = denchums.map((denchum, index)=> {
     return `
         <div class="col l-3 c-6 item-product-wrap">
             <div class="new__product-img-wrapper item-product">
-                <a href="./index_product.html">
+                <a href="#" class="product-img-link" data-index="${index}">
                     <img src="${denchum.img}" alt="" class="new__product-img item-product-img">
                 </a>
             </div>
@@ -235,7 +274,6 @@ const denchums = [
   list_denchum.innerHTML = html_denchum.join(" ")
 
 let carts = [];
-
 // Lấy dữ liệu từ local storage (nếu có)
 const storedProducts = localStorage.getItem('carts');
 if (storedProducts) {
@@ -243,6 +281,7 @@ if (storedProducts) {
     carts = JSON.parse(storedProducts);
 }
 
+// Thêm vào giỏ hàng
 list_denchum.addEventListener('click', (event) => {
     if (event.target.classList.contains('item-title-link')) {
         const selectedProductIndex = Array.from(list_denchum.children).indexOf(event.target.closest('.item-product-wrap'));
@@ -267,6 +306,18 @@ list_denchum.addEventListener('click', (event) => {
     }
 });
 
+// Thêm sự kiện click cho từng ảnh sản phẩm
+const productImages = document.querySelectorAll('.product-img-link');
+productImages.forEach((image, index) => {
+  image.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    // Lưu dữ liệu sản phẩm được nhấp vào local
+    localStorage.setItem('CTSP', JSON.stringify(denchums[index]));
+
+    window.location.href = './index_product.html';
+  });
+});
 
 // ------------- Đèn mâm ốp trần ------------------
 const denmamoptrans = [
@@ -1197,6 +1248,3 @@ const dentrungbays = [
     `
   })
   list_dentrungbay.innerHTML = html_dentrungbay.join(" ")
-
-
-

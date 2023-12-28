@@ -172,6 +172,6 @@ function DatHang() {
     else {
         alert("Đặt hàng thành công!");
         localStorage.removeItem('carts');
-        location.reload();
+        window.location.href = './InHoaDonBan.html'
     }
 }

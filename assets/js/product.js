@@ -7,10 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
   
     // Xử lý sự kiện khi nhấn nút giảm
     giam.addEventListener("click", function () {
-      if (quantity > 0) {
+      if (quantity > 1) {
         quantity -= 1;
       } else {
-        quantity = 0;
+        quantity = 1;
       }
       selectProduct.value = quantity;
     });
@@ -24,41 +24,24 @@ document.addEventListener("DOMContentLoaded", function() {
       }
       selectProduct.value = quantity;
     });
+    
 
-//-------------------GIỎ HÀNG--------------------
+    // Lấy dữ liệu sản phẩm đã lưu từ local
+    const storedProductData = localStorage.getItem('CTSP');
 
-// tăng số lượng sản phẩm
-
-  const quantityInput = document.getElementById("quantity");
-  const incrementButton = document.getElementById("increment");
-  const decrementButton = document.getElementById("decrement");
-
-  incrementButton.addEventListener("click", function () {
-    const currentValue = parseInt(quantityInput.value);
-    if (currentValue >= 0) {
-      quantityInput.value = currentValue + 1;
+    if (storedProductData) {
+      const productData = JSON.parse(storedProductData);
+  
+      // Hiển thị dữ liệu sản phẩm trên trang chi tiết
+      document.querySelector('.img').src = productData.img;
+      document.querySelector('.name_product').textContent = productData.title;
+      document.querySelector('.gia_giam').textContent = productData.giagiam;
+      document.querySelector('.gia').textContent = productData.gia;
+  
+      // Xóa dữ liệu đã lưu từ local
+      localStorage.removeItem('CTSP');
     }
   });
-
-  decrementButton.addEventListener("click", function () {
-    const currentValue = parseInt(quantityInput.value);
-    if (currentValue > 0) {
-      quantityInput.value = currentValue - 1;
-    }
-  });
-
-// chọn 1 trong 2 input
-  const cashPayment = document.getElementById("cashPayment");
-  const onlinePayment = document.getElementById("onlinePayment");
-
-  cashPayment.addEventListener("change", function () {
-    onlinePayment.checked = !cashPayment.checked;
-  });
-
-  onlinePayment.addEventListener("change", function () {
-    cashPayment.checked = !onlinePayment.checked;
-  });
-});
 
 
 
